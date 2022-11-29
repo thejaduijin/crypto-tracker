@@ -1,3 +1,4 @@
+import { makeStyles } from '@mui/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -5,13 +6,23 @@ import CoinPage from './Pages/CoinPage/CoinPage';
 import HomePage from './Pages/HomePage/HomePage';
 
 function App() {
+  const useStyles = makeStyles(()=>({
+    App:{
+      backgroundColor:"#14161a",
+      color:"white",
+      minHeight:"100vh"
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <BrowserRouter>
+    <div className={classes.App}>
       <Header />
-      <div className="App">
         <Routes>
-          <Route path="/" component={HomePage} exact />
-          <Route path="/coins:id" component={CoinPage} />
+          <Route path="/" element={<HomePage />} exact />
+          <Route path="/coins/:id" element={<CoinPage />} />
         </Routes>
       </div>
     </BrowserRouter>
